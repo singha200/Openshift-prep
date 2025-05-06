@@ -11,7 +11,7 @@
     - Minimum: 5Mi
     - Maximum: 300Mi
 ### Set the `container memory limit` between `5Mi and 300Mi` and container `default memory request` is `100Mi`
-- It means, container Memory Limit :
+- Set the `container memory limit` between `5Mi and 300Mi`. It means, container Memory Limit :
 	- Minimum: 5Mi
 	- Maximum: 300Mi
 - container `Default Memory Request` is `100Mi`
