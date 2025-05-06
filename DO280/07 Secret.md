@@ -9,3 +9,45 @@ oc create  secret generic ex280-secret --from-literal=MYSQL_ROOT_PASSWORD=redhat
 ```
 oc describe secret ex280-secret
 ```
+
+# Question: Use the secret `ex280-secret`
+- There is one pod already exist
+- It should use ex280-secret secret previously created.
+- Application should produce output.
+
+### Solution:
+### Go to the project first.
+```
+oc project cloud
+```
+```
+oc get all
+```
+### Due to env variable the application is not running. 
+### Verify that the subjective pod is a part of Deployment or StatefulSet or DeploymentConfig (dc). If it is belongs to deploymentConfig then run 
+```
+oc get dc
+```
+### or
+```
+oc get deployment
+```
+
+### If it is DeploymentConfig, then run the below command. 
+
+```
+oc set env dc/mysql --prefix MYSQL_ROOT_PASSWORD --from secret/ex280-secret
+```
+
+### If it is deployment, then run the below commmand.
+```
+pc set env --from=secret/ex280-secret deployment DEPLOYMENT_NAME
+```
+
+### check the logs or events.
+```
+oc logs POD_NAME
+oc get events
+```
+
+### Once you set the environment variable and after that application is not working than you can see the logs and events for further reasons. May be on worker node taint is applied. if it is than remove the taint from worker node only.
