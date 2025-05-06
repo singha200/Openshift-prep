@@ -1,4 +1,4 @@
-# Create secret with named `ex280-secret` in cloud project. The key name should be `environment` and the value of key should be `production`
+# Create secret with named `ex280-secret` in `cloud` project. The key name should be `environment` and the value of key should be `production`
 ```
 oc project cloud
 ```
