@@ -1,7 +1,7 @@
-### Question: Create Resources Quota with below information for project `beta`
-•	Quota Name is `ex280-quota`
-•	Maximum  Pods `7` and Service ip `6` and Replication Controller `5` 
-•	Memory `1G` and cpu core is `1`
+# Question: Create Resources Quota with below information for project `beta`
+- Quota Name is `ex280-quota`
+- Maximum  Pods `7` and Service ip `6` and Replication Controller `5` 
+- Memory `1G` and cpu core is `1`
 --- 
 ## Solution:
 
