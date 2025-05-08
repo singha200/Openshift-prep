@@ -13,6 +13,10 @@ oc project beta
 ```
 oc get quota
 ```
+## Not sure the command ?
+```
+oc create quota --help | head
+```
 ### Now, create the quota.
 ```
 oc create quota ex280-quota  --hard=memory=1Gi,cpu=1,pods=7,services=6,replicationcontrollers=5
