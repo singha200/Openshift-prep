@@ -1,3 +1,13 @@
+## Note:
+#### Each container running on a node **consumes compute resources**, which are measurable quantities that can be requested, allocated, and consumed.
+
+#### When creating a pod configuration file, you can `optionally` specify how much CPU, memory (RAM), and local ephemeral storage each container needs in order to better schedule pods in the cluster and ensure satisfactory performance.
+
+#### CPU is measured in units called millicores. Each node in a cluster inspects the operating system to determine the amount of CPU cores on the node, then multiplies that value by 1000 to express its total capacity. For example, if a node has 2 cores, the node’s CPU capacity would be represented as 2000m. If you wanted to use 1/10 of a single core, it would be represented as 100m.
+
+#### Memory and ephemeral storage are measured in bytes. In addition, it may be used with SI suffixes (E, P, T, G, M, K) or their power-of-two-equivalents (Ei, Pi, Ti, Gi, Mi, Ki).
+
+
 # Question: Create Resources Quota with below information for project `beta`
 - Quota Name is `ex280-quota`
 - Maximum  Pods `7` and Service ip `6` and Replication Controller `5` 
