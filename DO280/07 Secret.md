@@ -1,4 +1,4 @@
-## Prepare a lab.
+## Prepare the lab for this question.
 ```
 oc new-project cloud
 oc create deployment mysql-app --image registry.ocp4.example.com:8443/redhattraining/mysql-app:v1
