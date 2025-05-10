@@ -38,15 +38,6 @@ oc get all
 ```
 ### Due to env variable the application is not running. 
 ### Verify that the subjective pod is a part of Deployment or StatefulSet or DeploymentConfig (dc). If it is belongs to deploymentConfig then run 
-```
-oc get dc
-```
-### or
-```
-oc get deployment
-```
-
-### If it is DeploymentConfig, then run the below command. 
 
 ```
 oc set env dc/mysql --prefix MYSQL_PASSWORD --from secret/ex280-secret
