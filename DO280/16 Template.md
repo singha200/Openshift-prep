@@ -17,17 +17,25 @@ oc whoami --show-console
 ### Go to "Administrator -> LimitRange", then copy the yaml file and then paste in one file.
 ```
 vi /tmp/limitrange.yaml
+```
 
+### Modify the values as per the question.
+### - minimum memory is 5Mi, max is 1Gi. `defaultrequest` 254 Mi `defaultlimit` is 512 Mi .
+![image](https://github.com/user-attachments/assets/da703c9e-20c1-4805-993b-ae4c12888d3f)
+
+### Copy the values from the above file "/tmp/limitrange.yaml" and paste it on file "/tmp/bootstrap.yaml".
 ```
 vi /tmp/bootstrap.yaml
 ```
+![boothstrap](https://github.com/user-attachments/assets/7246fc0e-6bb1-44e4-bce3-663c9be0662f)
 
 
 ### Create the bootstrap template.
 ```
 oc apply -f /tmp/bootstrap.yaml -n openshift-config
-
 ```
+
+### We can check the template.
 ```
 oc get template -n openshift-config
 ```
@@ -36,13 +44,14 @@ oc get template -n openshift-config
 NAME               DESCRIPTION    PARAMETERS    OBJECTS
 project-request                   5 (5 blank)    3
 ```
-
+### - make sure this template available as default request `new-project` template for users.
 
 ```
-[student@workstation ~]$ oc get project.config
+oc get project.config
+```
+### You must see like this output.
 NAME      AGE   
 cluster   472d  
-```
 ```
 oc edit project.config cluster
 ```
@@ -72,7 +81,7 @@ metadata:
 spec: {}
 ```
 
-TO:
+## TO:
 ```
 apiVersion: config.openshift.io/v1
 kind: Project
