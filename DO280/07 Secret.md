@@ -1,9 +1,23 @@
-# Create secret with named `ex280-secret` in `cloud` project. The key name should be `MYSQL_ROOT_PASSWORD` and the value of key should be `redhat`
+## Prepare a lab.
+```
+oc new-project cloud
+oc create deployment mysql-app --image registry.ocp4.example.com:8443/redhattraining/mysql-app:v1
+oc create secret generic ex280-root --from-literal=MYSQL_USER=redhat --from-literal=MYSQL_DATABASE=world_x
+oc set env --from=secret/ex280-root deployment mysql-app
+```
+
+
+
+
+
+
+
+# Create secret with named `ex280-secret` in `cloud` project. The key name should be `MYSQL_PASSWORD` and the value of key should be `redhat123`
 ```
 oc project cloud
 ```
 ```
-oc create  secret generic ex280-secret --from-literal=MYSQL_ROOT_PASSWORD=redhat
+oc create  secret generic ex280-secret --from-literal=MYSQL_PASSWORD=redhat123
 ```
 
 ```
@@ -36,12 +50,12 @@ oc get deployment
 ### If it is DeploymentConfig, then run the below command. 
 
 ```
-oc set env dc/mysql --prefix MYSQL_ROOT_PASSWORD --from secret/ex280-secret
+oc set env dc/mysql --prefix MYSQL_PASSWORD --from secret/ex280-secret
 ```
 
 ### If it is deployment, then run the below commmand.
 ```
-oc set env --from=secret/ex280-secret deployment DEPLOYMENT_NAME
+oc set env --from=secret/ex280-secret deployment mysql-app
 ```
 
 ### check the logs or events.
