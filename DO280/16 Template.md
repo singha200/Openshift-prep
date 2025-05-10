@@ -50,38 +50,12 @@ project-request                   5 (5 blank)    3
 oc get project.config
 ```
 ### You must see like this output.
-NAME      AGE   
-cluster   472d  
+![image](https://github.com/user-attachments/assets/52509e7c-8897-4b7a-aa17-3415be4b46b0)
+
 ```
 oc edit project.config cluster
 ```
-```
-Please edit the object below. Lines beginning with a '#' will be ignored,
-# and an empty file will abort the edit. If an error occurs while saving this file will be
-# reopened with the relevant failures.
-#
-apiVersion: config.openshift.io/v1
-kind: Project
-metadata:
-  annotations :
-    include. release. openshift. io/ibm-cloud-managed: "true"
-    include. release. openshift. io/self-managed-high-availability: "true"
-    include.release. openshift. io/single-node-developer: "true"
-    release. openshift. io/create-only: "true"
-    creationTimestamp: "2024-01-23T12:00:53Z"
-  generation: 1
-  name: cluster
-  ownerReferences:
-  - apiVersion: config.openshift.io/v1
-    kind: ClusterVersion
-    name: version
-    uid: c1595d31-17e8-4a05-9002-d7399f1ed9c3
-    resourceVersion: "1633"
-    uid: 1c658959-11a4-4ec5-8532-e6e5dc9a8de7
-spec: {}
-```
 
-## TO:
 ```
 apiVersion: config.openshift.io/v1
 kind: Project
