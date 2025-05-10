@@ -15,9 +15,9 @@
 --- 
 ## Solution:
 
-### Go to the project first.
+### Createa  project first.
 ```
-oc project beta
+oc new-project beta
 ```
 ### Check the quota.
 ```
