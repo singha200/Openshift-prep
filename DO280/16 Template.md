@@ -81,11 +81,11 @@ spec:
 
 ```
 
-### Check the pods in the namespace "openshift-apiserver"
+### Check the pods in the namespace "openshift-apiserver". 
 ```
 oc get pods -n openshift-apiserver -w
 ```
-### Create a new project and our limitrange should be there. 
+### Once the new pod/s started running then, create a new project and our limitrange should be there. 
 ```
 oc new-project anish
 ```
