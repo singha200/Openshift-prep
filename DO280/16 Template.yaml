@@ -1,0 +1,117 @@
+# Install / Manage Operators
+### Question: Create an project template with limitrange with container
+- minimum memory is 5Mi, max is 1Gi. `defaultrequest` 254 Mi `defaultlimit` is 512 Mi .
+- make sure this template available as default request `new-project` template for users.
+
+```
+oc adm --help
+```
+```
+oc adm create-bootstrap-project-template -o yaml > /tmp/bootstrap.yaml
+```
+### Open the web console
+```
+oc whoami --show-console
+```
+
+### Go to "Administrator -> LimitRange", then copy the yaml file and then paste in one file.
+```
+vi /tmp/limitrange.yaml
+
+```
+vi /tmp/bootstrap.yaml
+```
+
+
+### Create the bootstrap template.
+```
+oc apply -f /tmp/bootstrap.yaml -n openshift-config
+
+```
+```
+oc get template -n openshift-config
+```
+### You must see like this output.
+```
+NAME               DESCRIPTION    PARAMETERS    OBJECTS
+project-request                   5 (5 blank)    3
+```
+
+
+```
+[student@workstation ~]$ oc get project.config
+NAME      AGE   
+cluster   472d  
+```
+```
+oc edit project.config cluster
+```
+```
+Please edit the object below. Lines beginning with a '#' will be ignored,
+# and an empty file will abort the edit. If an error occurs while saving this file will be
+# reopened with the relevant failures.
+#
+apiVersion: config.openshift.io/v1
+kind: Project
+metadata:
+  annotations :
+    include. release. openshift. io/ibm-cloud-managed: "true"
+    include. release. openshift. io/self-managed-high-availability: "true"
+    include.release. openshift. io/single-node-developer: "true"
+    release. openshift. io/create-only: "true"
+    creationTimestamp: "2024-01-23T12:00:53Z"
+  generation: 1
+  name: cluster
+  ownerReferences:
+  - apiVersion: config.openshift.io/v1
+    kind: ClusterVersion
+    name: version
+    uid: c1595d31-17e8-4a05-9002-d7399f1ed9c3
+    resourceVersion: "1633"
+    uid: 1c658959-11a4-4ec5-8532-e6e5dc9a8de7
+spec: {}
+```
+
+TO:
+```
+apiVersion: config.openshift.io/v1
+kind: Project
+metadata:
+  annotations :
+    include. release. openshift. io/ibm-cloud-managed: "true"
+    include. release. openshift. io/self-managed-high-availability: "true"
+    include.release. openshift. io/single-node-developer: "true"
+    release. openshift. io/create-only: "true"
+    creationTimestamp: "2024-01-23T12:00:53Z"
+  generation: 1
+  name: cluster
+  ownerReferences:
+  - apiVersion: config.openshift.io/v1
+    kind: ClusterVersion
+    name: version
+    uid: c1595d31-17e8-4a05-9002-d7399f1ed9c3
+    resourceVersion: "1633"
+    uid: 1c658959-11a4-4ec5-8532-e6e5dc9a8de7
+spec: 
+  projectRequestTemplate:          ## Added line
+    name: project-request          ## Added line
+
+```
+
+### Check the pods in the namespace "openshift-apiserver"
+```
+oc get pods -n openshift-apiserver -w
+```
+### Create a new project and our limitrange should be there. 
+```
+oc new-project anish
+```
+#### Check the limitrange
+```
+oc get limitranges 
+```
+
+#### You can also create a new application.
+```
+oc new-app --name hello  --image registry.ocp4.example.com:8443/redhattraining/hello-world-nginx:v1.0
+```
