@@ -41,7 +41,7 @@ oc set env dc/mysql --prefix MYSQL_ROOT_PASSWORD --from secret/ex280-secret
 
 ### If it is deployment, then run the below commmand.
 ```
-pc set env --from=secret/ex280-secret deployment DEPLOYMENT_NAME
+oc set env --from=secret/ex280-secret deployment DEPLOYMENT_NAME
 ```
 
 ### check the logs or events.
