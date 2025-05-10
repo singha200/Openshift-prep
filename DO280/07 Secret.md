@@ -23,7 +23,7 @@ oc describe secret ex280-secret
 ```
 ---
 
-# Question: Use the secret `ex280-secret`
+# Question: Use the secret `ex280-secret` in project `cloud`
 - There is one pod already exist
 - It should use ex280-secret secret previously created.
 - Application should produce output.
