@@ -7,28 +7,27 @@ oc set env --from=secret/ex280-root deployment mysql-app
 ```
 
 
-
-
-
-
-
-# Create secret with named `ex280-secret` in `cloud` project. The key name should be `MYSQL_PASSWORD` and the value of key should be `redhat123`
+# Question: Create secret with named `ex280-secret` in `cloud` project. The key name should be `MYSQL_PASSWORD` and the value of key should be `redhat123`
+### Solution
+### Go to the project first.
 ```
 oc project cloud
 ```
+### Create a generic secret with name `ex280-secret` with option `--from-literal=MYSQL_PASSWORD=redhat123`
 ```
 oc create  secret generic ex280-secret --from-literal=MYSQL_PASSWORD=redhat123
 ```
-
+### Once secret created, you can verify it.
 ```
 oc describe secret ex280-secret
 ```
+---
 
 # Question: Use the secret `ex280-secret`
 - There is one pod already exist
 - It should use ex280-secret secret previously created.
 - Application should produce output.
-
+---
 ### Solution:
 ### Go to the project first.
 ```
