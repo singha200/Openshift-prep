@@ -157,10 +157,8 @@ oc new-project cloud
 oc create deployment mysql-app --image registry.ocp4.example.com:8443/redhattraining/mysql-app:v1
 oc create secret generic ex280-root --from-literal=MYSQL_USER=redhat --from-literal=MYSQL_DATABASE=world_x
 oc set env --from=secret/ex280-root deployment mysql-app
-oc login -u harry -p review
 oc new-project tiger
 oc new-app --name hello --image registry.ocp4.example.com:8443/redhattraining/hello-world-nginx:v1.0
-oc login -u harry -p review
 oc new-project scalling
 oc new-app --name hello --image registry.ocp4.example.com:8443/redhattraining/hello-world-nginx:v1.0
 oc new-project network-policy
