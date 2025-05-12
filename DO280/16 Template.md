@@ -2,7 +2,7 @@
 ### Question: Create an project template with limitrange with container
 - minimum memory is 5Mi, max is 1Gi. `defaultrequest` 254 Mi `defaultlimit` is 512 Mi .
 - make sure this template available as default request `new-project` template for users.
-
+---
 ```
 oc adm --help
 ```
