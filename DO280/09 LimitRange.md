@@ -1,9 +1,9 @@
-# Create LimitRange for project `orange`:
+# Question: Create LimitRange for project `orange`:
 - Set the `pod memory limit` between `5Mi and 300Mi`
 - Set the `container memory limit` between `5Mi and 300Mi` and container `default memory request` is `100Mi`
 - Set the `pod cpu limit` between `5m and 300m`
 - Set the `container cpu limit` between `5m and 300m` and container `default request limit for cpu` is `100m`
-
+---
 ### Solution. 
 ### In this question, we need to set the limit range at pod and container level.
 ### Set the `pod memory limit` between `5Mi and 300Mi`. 
