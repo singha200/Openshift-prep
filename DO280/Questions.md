@@ -118,7 +118,7 @@
 - **Create an Deployment with**
 	- Name of deployment is `tiger`
 	- Image is  `registry.ocp4.example.com:8443/redhattraining/hello-world-nginx:v1.0`
-	- Application uses this link to show output http://contet.example.oco4.com
+	- Application uses this link to show output http://test-anishrana2001.apps.ocp4.example.com
 	- After attaching storage it shows desired output
 ---
 
@@ -135,10 +135,10 @@
 - Probe must survive atleast `3` crash
 ---
 
-# Question 20. Collect Cluster information and create a tar file with name student101<cluster.id>.tar.gz and send it to redhat support.
+# Question 20. Collect Cluster information and create a tar file with name student101-<cluster.id>.tar.gz and send it to redhat support.
 - Use command tar cvaf
 - One script has been provided to upload tar in redhat support
-- /usr/bin/script student101<cluster.id>.tar.gz
+- /usr/bin/script student101-<cluster.id>.tar.gz
 - This script can be performed multiple times and it will overwrite the tar file every time
 ---
 
