@@ -52,3 +52,7 @@ spec:
 ```
 oc apply -f limitrange.yaml
 ```
+### Post Checks.
+```
+oc get limitrange
+```
