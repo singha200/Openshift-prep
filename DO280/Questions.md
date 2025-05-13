@@ -147,8 +147,8 @@
 # How to create the lab?
 ```
 lab start appsec-scc
-oc new-project alpha
 oc login -u admin -p redhatocp https://api.ocp4.example.com:6443
+oc new-project alpha
 oc new-app --name gitlab --image registry.ocp4.example.com:8443/redhattraining/gitlab-ce:8.4.3-ce.0
 oc new-project quart
 oc new-app --name todo-http --image registry.ocp4.example.com:8443/redhattraining/todo-angular:v1.1
@@ -164,9 +164,6 @@ oc new-app --name hello --image registry.ocp4.example.com:8443/redhattraining/he
 oc new-project network-policy
 oc new-app --name hello  --image registry.ocp4.example.com:8443/redhattraining/hello-world-nginx:v1.0
 oc expose service/hello
-oc new-project different-namespace
-oc new-app --name sample-app  --image registry.ocp4.example.com:8443/redhattraining/hello-world-nginx:v1.0
-
 cat <<EOF | kubectl apply -f -
 kind: NetworkPolicy
 apiVersion: networking.k8s.io/v1
@@ -175,6 +172,10 @@ metadata:
 spec:
   podSelector: {}
 EOF
+oc new-project different-namespace
+oc new-app --name sample-app  --image registry.ocp4.example.com:8443/redhattraining/hello-world-nginx:v1.0
+
+
 oc new-project tuesday
 oc new-app --name liveness-deployment  --image registry.ocp4.example.com:8443/redhattraining/hello-world-nginx:v1.0
 ```
