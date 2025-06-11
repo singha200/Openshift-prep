@@ -6,8 +6,9 @@ read ST
 printf "Locality:"
 read locality
 printf "Organization Name:"
-printf "MyName:"
 read OName
+printf "MyName:"
+read Myname
 printf "Common Name:"
 read CName
 openssl genrsa -out server.key 4096
