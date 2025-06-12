@@ -27,8 +27,7 @@ vi /tmp/limitrange.yaml
 ```
 vi /tmp/bootstrap.yaml
 ```
-![boothstrap](https://github.com/user-attachments/assets/7246fc0e-6bb1-44e4-bce3-663c9be0662f)
-
+![image](https://github.com/user-attachments/assets/36f05d2d-afd8-4893-a747-5be2f68de60f)
 
 ### Create the bootstrap template.
 ```
