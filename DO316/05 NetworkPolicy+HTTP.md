@@ -59,13 +59,17 @@ curl localhost
 ```
 oc get netpol
 ```
+```
+oc describe netpol netpol-http
+```
 
-### Add the label on Namespace == name=client-ns
+### Based upon the above output, we need to modify the labels on namespace and VM.
+### Add the label on Namespace ==> `name=client-ns`   👈👈👈
 ```
 oc get namespaces banana --show-labels 
 ```
 
-### Add the label on VM under the "/spec/template/metadata/labels/" to "env: production"
+### Add the label on VM under the "/spec/template/metadata/labels/" to "env: production". Based upon the network policy  👈👈👈
 ```
 oc edit vm myvm-lan1
 ```
@@ -75,20 +79,20 @@ oc edit vm myvm-lan1
 oc patch vm myvm-lan1 --type='json' -p='[{"op": "add", "path": "/spec/template/metadata/labels/env", "value": "production"}]'
 ```
 
-
+- A `Clusterlp Service` allows Web Traffic into the `myvm-lan1` VirtualMachine
 ### It's time to create service and expose it. Please bear in mind that we must use "virtctl" command to expose the VMi.
 ```
 virtctl expose vmi myvm-lan1 --name svc-netpol --type=ClusterIP --port 80 --target-port=80
 ```
-
-
 ### you should see the endpoints.
 ```
 oc get endpoints/svc-netpol 
 ```
 
+- The Network Policy Restricts access to the VirtualMachine `myvm-lan1` and allowing only the member of Project `banana` to access TCP port `80` 
+- Other Project cannot Reach the VirtualMachine `myvm-lan1` at TCP Port `80`
 ### Post checks!!!
-### Let's create one deployment and check if we can access to our VM / VMI or Web server. It should return the page. 
+### Let's create one deployment in the `banana` proejct and check if we can access to our VM / VMI or Web server. It should return the page. 
 ```
 oc create deployment testing --image=registry.ocp4.example.com:8443/redhattraining/hello-world-nginx:v1.0
 ```
