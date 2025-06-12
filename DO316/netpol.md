@@ -1,24 +1,25 @@
 ```
-apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
+apiVersion: networking.k8s.io/v1
 metadata:
   name: netpol-http
-  namespace: ''
+  namespace: banana
 spec:
   podSelector:
     matchLabels:
-      app: myvm-lan1
-  policyTypes:
-    - Ingress
+      env: production
   ingress:
-    - from:
-        - podSelector: {}
-          namespaceSelector:
-            matchLabels:
-              name: client-ns
-      ports:
+    - ports:
         - protocol: TCP
           port: 443
         - protocol: TCP
           port: 80
+      from:
+        - podSelector: {}
+          namespaceSelector:
+            matchLabels:
+              name: client-ns
+    - {}
+  policyTypes:
+    - Ingress
 ```
