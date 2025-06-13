@@ -8,7 +8,7 @@ oc create secret generic ssh-key --from-file=public-key=/tmp/devops-id_rsa.pub -
 ```
 
 # Create a VirtualMachine in the `banana` project with below requirements. 
-- Create a VirtualMachine called `myvm-lan1` from template "Red Hat Enterprise Linux 9 VM"
+- User `suraj` should create a VirtualMachine named `myvm-lan1` from template "Red Hat Enterprise Linux 9 VM"
 - Use PVC URL, `http://utility.lab.example.com:8080/openshift4/images/rhel9-helloworld.qcow2`
 -  The StorageClassName is `ocs-external-storagecluster-ceph-rbd-virtualization`
 -  The PVC size should be 30GiB
