@@ -31,3 +31,51 @@
 ### Switch to `suraj` user on console and create a VM from "RHEL 9.2, server, small" template with using mentioned PVC URL.
 
 
+
+## Loing through `suraj` user.
+
+![image](https://github.com/user-attachments/assets/c2585076-fed2-4251-a3a9-01083fed55e5)
+
+## Select the `apple` project and go to the virtuallization.
+
+![image](https://github.com/user-attachments/assets/5bd8de74-8dbf-4c8c-b248-b3abcd69ae2e)
+
+### Select the right template as per question.
+
+![image](https://github.com/user-attachments/assets/76f5cf2b-5c2e-46ea-abd1-09d5c7adc237)
+
+## Fill the details, like name of `virtual server` and `disk size` and then click on `customize VirtualMachine`
+
+![image](https://github.com/user-attachments/assets/ef03bf68-07ea-4f81-965f-5e5f044ad79d)
+
+
+## Click on `Network Interfaces` and add the 2nd interface by click on `Add Network Interface`.
+
+![image](https://github.com/user-attachments/assets/883c990a-1546-4216-b0d3-514aade4d924)
+
+## Fill the details as per question.
+
+![image](https://github.com/user-attachments/assets/87c30c1c-4f83-490b-bdcd-8738d030e72e)
+
+## Click on `Disk` and modify the details.
+
+![image](https://github.com/user-attachments/assets/e05621d0-5c00-4562-a865-f417103b4b62)
+
+
+### Modify the storageClass name to `ocs-external-storagecluster-ceph-rbd-virtualization`
+
+![image](https://github.com/user-attachments/assets/af2653e5-f81c-4631-8d5e-c0963a38dbcd)
+
+### Click on `Script` tab.
+
+![image](https://github.com/user-attachments/assets/3318f7b3-8fa7-4442-8635-24114432d0c1)
+
+## Add the user name `suraj` and its credentials.
+
+![image](https://github.com/user-attachments/assets/b5becfd7-4764-419a-ad7f-67dda0a43c90)
+
+## Add the id_rsa,key file
+
+
+
+
