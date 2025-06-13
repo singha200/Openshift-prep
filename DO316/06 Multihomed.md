@@ -6,22 +6,22 @@
 - The ssh Key /home/opsadm/.ssh/id_rsa_ex316.pub from user opsadm at workbench.lab.example.com has been added as an authorized ssh key via the cloud-init definition
 
 ## Storage Configuration
-	- The Image used to Create the Persistemt volume claim for the VirtualMachine boot source is http://utility.lab.example.com:8080/openshift4/images/rhel9-helloworld.qcow2
-	- The StorageClassName is `ocs-external-storagecluster-ceph-rbd-virtualization`
-	- The PVC size is 10Gi
+- The Image used to Create the Persistemt volume claim for the VirtualMachine boot source is http://utility.lab.example.com:8080/openshift4/images/rhel9-helloworld.qcow2
+- The StorageClassName is `ocs-external-storagecluster-ceph-rbd-virtualization`
+- The PVC size is 10Gi
 
 ## The first Network Interface configuration
-	- The first Network interface name is default
-	- The First Network ineterface is attached to the pod networking (default) network
-	- The first network interface type is masquerade
-	- The model for the first network interface is virtio
+- The first Network interface name is default
+- The First Network ineterface is attached to the pod networking (default) network
+- The first network interface type is masquerade
+- The model for the first network interface is virtio
 
 ## The Second Network Interface Configuration
-	- The second network interface name is `nic-0`
-	- The second network interface is attached to the `apple/database-network` network
-	- The second network interface type is `bridge`
-	- The IP address of the second network interface is provided by OpenShift
-	- The model for the second network interface is virto
+- The second network interface name is `nic-0`
+- The second network interface is attached to the `apple/database-network` network
+- The second network interface type is `bridge`
+- The IP address of the second network interface is provided by OpenShift
+- The model for the second network interface is virto
 ---
 
 ### Solution:
