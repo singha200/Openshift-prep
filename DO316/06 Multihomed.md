@@ -26,12 +26,19 @@
 ---
 
 ### Solution:
-### As per question, we need to add the 2nd interface, it means that first, we need to install the operator ""
-### Suraj user must able to create the VM "mariadb-server", In Question 3, we have already gave the rights to this user.
-### Switch to `suraj` user on console and create a VM from "RHEL 9.2, server, small" template with using mentioned PVC URL.
+### Step 1. As per question, we need to add the 2nd interface, it means that first, we need to install the operator ""
+### Step 2. Suraj user must able to create the VM "mariadb-server", In Question 3, we have already gave the rights to this user.
+### Step 3. Switch to `suraj` user on console and create a VM from "RHEL 9.2, server, small" template with using mentioned PVC URL.
 
 
-
+### Step 1. As per question, we need to add the 2nd interface, it means that first, we need to install the operator ""
+### Before that, let's add the label on workernodes so that we can create a extra interface.
+```
+oc label nodes worker01 external-network=true
+```
+```
+oc label nodes worker01 external-network=true
+```
 ## Loing through `suraj` user.
 
 ![image](https://github.com/user-attachments/assets/c2585076-fed2-4251-a3a9-01083fed55e5)
