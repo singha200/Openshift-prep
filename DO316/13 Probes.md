@@ -35,7 +35,7 @@ oc get deployment test -o  yaml | grep -iA 10 liveness
           timeoutSeconds: 1
 
 
-### Now, you need to edit these details on the VM `mariadb-server`
+### Now, you need to edit these details on the VM `mariadb-server`. Search for `domain`.
 ```
 oc edit vm mariadb-server
 ```
