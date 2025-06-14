@@ -85,3 +85,67 @@ systemctl stop mysql
 ### Logout.
 ## mariadb-server VM should be restarted due to liveness probe
 
+
+### For More practice, you can also try to configure the readiness Probs. Only for increase your knowledge purpose.
+
+
+
+MYROUTE_readiness=`oc get routes | awk '{print $2}' | grep -v HOST` ; echo $MYROUTE_readiness
+for i in {1..20} ; do curl http://$MYROUTE_readiness ; done
+
+
+
+
+oc set probe deploy/test --readiness --get-url=http://:8080/healthz --initial-delay-seconds=10
+oc get deployment test -o yaml
+
+Search for readiness probs and copy the contents and modify it as per your requirements
+
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 80
+          initialDelaySeconds: 10
+          periodSeconds: 5
+          successThreshold: 1
+          timeoutSeconds: 2
+          failureThreshold: 2
+
+
+### Modify the Vm template and then restart the www1 VM.
+oc edit vm www1
+virtctl restart www1
+
+
+### Post Cheks. 
+
+```
+oc get vm,vmi,endpoints
+```
+
+### If you can see the www1 IP in the endpoints and then proceed further. 
+oc edit vm www2
+virtctl restart www2
+
+### Post Cheks for www2 VM
+
+```
+oc get vm,vmi,endpoints
+```
+
+### Final Post checks
+```
+for i in {1..20} ; do curl http://$MYROUTE_readiness ; done
+```
+
+
+
+
+
+
+oc edit vm/web1 
+virtctl restart web1 
+
+oc create service clusterip front --tcp=80:80 
+oc create route edge front --service front --hostname front-review-cr3.apps.ocp4.example.com
+curl https://front-review-cr3.apps.ocp4.example.com/?[1-3]
