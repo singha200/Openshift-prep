@@ -40,8 +40,10 @@ oc label nodes worker01 external-network=true
 oc label nodes worker01 external-network=true
 ```
 
-
+### Create `NodeNetworkConfigurationPolicy`
 ![image](https://github.com/user-attachments/assets/17f0a830-4a22-4612-8f51-bc9df9318af2)
+## Create a `NetworkAttachmentDefinitions`
+![image](https://github.com/user-attachments/assets/fe3a507c-5358-415e-9553-e55771903b71)
 
 ## Loing through `suraj` user.
 
