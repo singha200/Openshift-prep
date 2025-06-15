@@ -10,8 +10,9 @@ oc login -u admin -p redhatocp  https://api.ocp4.example.com:6443
 ### Open a web browser and go to the web console URL.
 ```
 https://console-openshift-console.apps.ocp4.example.com
-
 ```
+## Click `htpasswd_provider` and log in as the `admin` user with `redhatocp` as the password.
+
 ## Step 1. Open the Redhat Console GUI.
 ![image](https://github.com/user-attachments/assets/511e6bca-0160-4793-801e-689780157dea)
 
