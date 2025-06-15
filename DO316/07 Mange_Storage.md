@@ -16,11 +16,11 @@ oc apply -f https://raw.githubusercontent.com/anishrana2001/Openshift/refs/heads
     - The disk is mounted at /var/www/html of `web1` permanently
 - Ensure the VirtualMachine `replicated` has a disk named `gori`
     - User name is `raja` and password is `anishrana2001`
-    - The disk uses http://materials.lab.example.com/images/disk-2024.gcow2 as a source
-    - The disk size is 1Gi
+    - The disk uses `http://utility.lab.example.com:8080/openshift4/images/rhel9-helloworld.qcow2` as a source
+    - The disk size is `1Gi`
     - The disk support shared access
-    - The disk is a block device and is accessible via /dev/vdc
-    - The disk is mounted at /var/www/html on `replicated` permanently
+    - The disk is a block device and is accessible via `/dev/vdc`
+    - The disk is mounted at `/var/www/html` on `replicated` permanently
     - Ensure the exiting data on these disk is preserved
 
 Both VirtualMachine are running normally
