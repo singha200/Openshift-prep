@@ -5,7 +5,7 @@ oc apply -f https://raw.githubusercontent.com/anishrana2001/Openshift/refs/heads
 ```
 
 # Manage Storage for VirtualMachines
-- Create two VirtualMachine in project `vm-image` in the following way:
+- Create two VirtualMachines in project `vm-image` in the following way:
   - Create a VirtualMachine named `replicated` using `replicated-template` template
   - Create a VirtualMachine named `web1` using `web1-template` template, do not change the template
   - Make sure the following conditions are met:
