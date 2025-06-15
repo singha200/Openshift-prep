@@ -4,7 +4,7 @@
 ```
 
 # Deploy a Multihomed VirtualMachine
-- Create a VM called `mariadb-server` from template `RedHat Linux 9.2 VirtualMachine` with 2 Network interfaces in `apple` project.
+- Create a VM called `mariadb-server` from template `Red Hat Enterprise Linux 9 VM` with 2 Network interfaces in `apple` project.
 - The Workload type of the VirtualMachine is `server` and flavor is `small`.
 - The user `suraj` creates the VirtualMachine `mariadb-server`
 - The user `suraj` with password "anishrana2001" should exists in the cloud-init definition.
