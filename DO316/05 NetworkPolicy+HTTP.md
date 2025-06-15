@@ -93,23 +93,22 @@ oc get endpoints/svc-netpol
 - Other Project cannot Reach the VirtualMachine `myvm-lan1` at TCP Port `80`
 ### Post checks!!!
 ### Let's create one deployment in the `banana` proejct and check if we can access to our VM / VMI or Web server. It should return the page. 
-```
-oc create deployment testing --image=registry.ocp4.example.com:8443/redhattraining/hello-world-nginx:v1.0
-```
+
+### Open the web console and create a dummy deployment
+
+![image](https://github.com/user-attachments/assets/5f70181f-edc2-4bb4-a319-e0c1903f264a)
 
 ```
 oc get pods 
 oc rsh pod/testing-7d674b5dc9-t65jx   curl svc-netpol.banana.svc.cluster.local
 ```
 
-### Let's create one project and try it, if we can access to VM/VMi or webserver. Ideally, it should not.
+### Let's create one project and then create a dummy deployment with default image after that try it, if we can access to VM/VMi or webserver. Ideally, it should not.
 ```
 oc new-project test
 ```
+![image](https://github.com/user-attachments/assets/b88bf594-6c60-40f5-b387-255b379b80dd)
 
-```
-oc new-app --name webserver-app5 --image registry.ocp4.example.com:8443/redhattraining/hello-world-nginx:v1.0
-```
 
 ### It should not work. 
 ```
