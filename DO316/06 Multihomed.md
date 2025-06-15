@@ -1,3 +1,8 @@
+### Prepare the lab for this question.
+```
+ lab start multihomed-nmstate
+```
+
 # Deploy a Multihomed VirtualMachine
 - Create a VM called `mariadb-server` from template `RedHat Linux 9.2 VirtualMachine` with 2 Network interfaces in `apple` project.
 - The Workload type of the VirtualMachine is `server` and flavor is `small`.
