@@ -1,5 +1,6 @@
 ### Prepare the lab.
 ```
+oc new-project vm-image
 oc apply -f https://raw.githubusercontent.com/anishrana2001/Openshift/refs/heads/main/DO316/replicated-template.yaml
 oc apply -f https://raw.githubusercontent.com/anishrana2001/Openshift/refs/heads/main/DO316/web1.template.yaml
 ```
