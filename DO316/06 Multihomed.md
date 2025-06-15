@@ -47,8 +47,9 @@ oc label nodes worker01 external-network=true
 
 ### Create `NodeNetworkConfigurationPolicy`
 ![image](https://github.com/user-attachments/assets/17f0a830-4a22-4612-8f51-bc9df9318af2)
-## Create a `NetworkAttachmentDefinitions`
-![image](https://github.com/user-attachments/assets/fe3a507c-5358-415e-9553-e55771903b71)
+## Create a `NetworkAttachmentDefinitions` in a `apple` project.
+![image](https://github.com/user-attachments/assets/47e60967-b9d7-455e-8703-b3306ca1bf5c)
+
 
 ## Loing through `suraj` user.
 
