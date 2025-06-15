@@ -39,6 +39,10 @@ oc label nodes worker01 external-network=true
 ```
 oc label nodes worker01 external-network=true
 ```
+
+
+![image](https://github.com/user-attachments/assets/17f0a830-4a22-4612-8f51-bc9df9318af2)
+
 ## Loing through `suraj` user.
 
 ![image](https://github.com/user-attachments/assets/c2585076-fed2-4251-a3a9-01083fed55e5)
