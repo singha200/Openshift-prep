@@ -20,3 +20,6 @@ oc new-project kiwi
 ```
 
 
+```
+sudo yum install httpd --allowerasing
+```
