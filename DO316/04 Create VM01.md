@@ -17,7 +17,7 @@ oc create secret generic ssh-key --from-file=public-key=/tmp/devops-id_rsa.pub -
 -  The flavor type of the VirtualMachine is `small`
 -  The network interface name is `default`
 -  The user raja with password `anishrana2001` exists in the cloud-init definition
--  The ssh Key "/home/devops/.ssh/id_rsa.pub" from user devops at workstation has been added as an authorized ssh key via the cloud-init definition
+-  The ssh Key "/home/student/.ssh/lab_rsa.pub" from user devops at workstation has been added as an authorized ssh key via the cloud-init definition
 ---
 
 ### Solution:
