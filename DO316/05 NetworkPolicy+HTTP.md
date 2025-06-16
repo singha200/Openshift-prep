@@ -100,7 +100,7 @@ oc get endpoints/svc-netpol
 
 ```
 oc get pods 
-oc rsh pod/testing-7d674b5dc9-t65jx   curl svc-netpol.banana.svc.cluster.local
+oc rsh pod/test-7d674b5dc9-t65jx   curl svc-netpol.banana.svc.cluster.local
 ```
 
 ### Let's create one project and then create a dummy deployment with default image after that try it, if we can access to VM/VMi or webserver. Ideally, it should not.
