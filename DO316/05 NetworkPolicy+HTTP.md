@@ -46,10 +46,10 @@ systemctl enable httpd
 - Download the service.html file from "https://raw.githubusercontent.com/anishrana2001/Openshift/refs/heads/main/DO316/service.html" and upload on `/var/www/html` on the VM.
 ```
 cd /var/www/html/  
-curl -o service.html  https://raw.githubusercontent.com/anishrana2001/Openshift/refs/heads/main/DO316/service.html
+curl -o service.html  https://raw.githubusercontent.com/anishrana2001/Openshift/refs/heads/main/DO316/anish.html
 
 vi /etc/httpd/conf/httpd.conf 
-## Search for index.html and replace to service.html 
+## Search for index.html and replace to anish.html 
 
 systemctl restart httpd
 curl localhost
