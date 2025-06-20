@@ -13,6 +13,9 @@ oc apply -f https://raw.githubusercontent.com/anishrana2001/Openshift/refs/heads
 - A `Clusterlp Service` allows Web Traffic into the `myvm-lan1` VirtualMachine
 - The Network Policy Restricts access to the VirtualMachine `myvm-lan1` and allowing only the member of Project `banana` to access TCP port `80` 
 - Other Project cannot Reach the VirtualMachine `myvm-lan1` at TCP Port `80`
+
+## Task Create a Network policy named `apple-access-netpol` in the `banana` project. Only the member of `apple` project should able to access the VM `myvm-lan2`
+## Task Create a Network policy named `kiwi-access-netpol` in the `banana` project. It should allow only the request coming from `kiwi` project.
 ---
 
 
