@@ -18,7 +18,7 @@ oc create secret generic ssh-key --from-file=public-key=/tmp/devops-id_rsa.pub -
 -  The network interface name is `default`
 -  The user `raja` with password `anishrana2001` exists in the cloud-init definition
 -  The ssh Key "/home/student/.ssh/lab_rsa.pub" from user devops at workstation has been added as an authorized ssh key via the cloud-init definition
-## Configure Network interface.
+## Task: Configure Network interface.
 - The first Network Interface configuration
 	- The first Network interface name is `default`
 	- The First Network ineterface is attached to the `pod networking` (default) network
@@ -32,7 +32,7 @@ oc create secret generic ssh-key --from-file=public-key=/tmp/devops-id_rsa.pub -
 	- The IP address of the second network interface is provided by OpenShift
 	- The model for the second network interface is `virto`
 
-## Create a Readiness probs with below configuration.
+## Task: Create a Readiness probs with below configuration.
       readinessProbe:
         httpGet:
           path: /health
