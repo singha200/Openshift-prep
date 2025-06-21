@@ -61,7 +61,7 @@ spec:
 ```
 
 ```
-oc patch vm/mariadb-server --type=merge /tmp/liveness.yaml
+oc patch vm/mariadb-server --type=merge --patch-file=/tmp/liveness.yaml
 ```	
 
 
