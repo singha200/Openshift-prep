@@ -11,13 +11,3 @@
   - When instantiated, these vitual machine will install the `httpd` RPM which is available from https://raw.githubusercontent.com/anishrana2001/Openshift/refs/heads/main/DO316/yum.repo-file.repo
   ---
 
-  ### Solution:
-
-```
-oc new-project kiwi
-```
-
-
-```
-sudo yum install httpd --allowerasing
-```
