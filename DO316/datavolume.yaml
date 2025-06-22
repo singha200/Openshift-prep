@@ -1,0 +1,14 @@
+apiVersion: cdi.kubevirt.io/v1beta1
+kind: DataVolume
+metadata:
+  name: <datavolume> 
+spec:
+  source:
+    pvc: 
+      namespace: "<source_namespace>" 
+      name: "<my_vm_disk>" 
+  storage: 
+    resources:
+      requests:
+        storage: 2Gi 
+    storageClassName: <storage_class>
