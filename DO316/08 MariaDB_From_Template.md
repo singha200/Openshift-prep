@@ -2,8 +2,6 @@
   - Create a project `kiwi` and a VirtualMachine template according to the following requirements
   - The Template name is `tmprhl9small` in the `kiwi` project
   - The Template is clone of the build-in rhel9-server-small template
-- # VirtualMachine Created using this template use:
-  - Name of the VM should be `database-kiwi`
   - Flavor small, with 1 CPU and 2Gi RAM
   - Storage space is 10Gi
   - Disk source rhel-9.2-x86_64-kvm.qcow2 provided at  http://utility.lab.example.com:8080/openshift4/images/mariadb-server.qcow2
