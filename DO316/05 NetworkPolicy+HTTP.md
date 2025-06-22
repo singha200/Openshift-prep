@@ -44,18 +44,16 @@ sudo yum install httpd -y
 - httpd services must be enabled after the reboot.
 ```
 systemctl enable httpd
+systemctl start httpd
 ```
 
 - Download the service.html file from "https://raw.githubusercontent.com/anishrana2001/Openshift/refs/heads/main/DO316/service.html" and upload on `/var/www/html` on the VM.
 ```
 cd /var/www/html/  
-curl -o service.html  https://raw.githubusercontent.com/anishrana2001/Openshift/refs/heads/main/DO316/anish.html
-
-vi /etc/httpd/conf/httpd.conf 
-## Search for index.html and replace to anish.html 
+curl -o anish.html  https://raw.githubusercontent.com/anishrana2001/Openshift/refs/heads/main/DO316/anish.html
 
 systemctl restart httpd
-curl localhost
+curl localhost/anish.html
 ```
 - A Network Policy named `netpol-http` exists in the `banana` Project
 ### Check the NetworkPolicy in the banana project.
