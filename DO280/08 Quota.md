@@ -36,3 +36,21 @@ oc create quota ex280-quota  --hard=memory=1Gi,cpu=1,pods=7,services=6,replicati
 ```
 oc get quota
 ```
+
+
+### Question 2:   Create a quota with below details.
+
+- cpu=1
+- memory=1G
+- pods=2
+- services=3
+- replicationcontrollers=2
+- resourcequotas=1
+- secrets=5
+- persistentvolumeclaims=10
+---
+
+### Solution :
+```
+oc create quota my-quota --hard=cpu=1,memory=1G,pods=2,services=3,replicationcontrollers=2,resourcequotas=1,secrets=5,persistentvolumeclaims=10
+```
