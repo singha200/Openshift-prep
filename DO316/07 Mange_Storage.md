@@ -14,7 +14,7 @@ oc apply -f https://raw.githubusercontent.com/anishrana2001/Openshift/refs/heads
     - The disk uses the same setting as the original `goldimg` on replicated, such as storageClass, acessMode,etc
     - The disk is a block device and is accessible via /dev/vdc
     - The disk is mounted at /var/www/html of `web1` permanently
-- Ensure the VirtualMachine `web1` has a disk named `gori`
+- Ensure the VirtualMachine `replicated` has a disk named `gori`
     - User name is `raja` and password is `anishrana2001`
     - The disk uses `http://utility.lab.example.com:8080/openshift4/images/rhel9-helloworld.qcow2` as a source
     - The disk size is `10Gi`
