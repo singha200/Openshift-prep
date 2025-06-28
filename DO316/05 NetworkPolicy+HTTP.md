@@ -8,7 +8,7 @@ oc apply -f https://raw.githubusercontent.com/anishrana2001/Openshift/refs/heads
 - Install the httpd package.
 - One can download the yum.repo file from `sudo curl -o /etc/yum.repos.d/yum.repo-file.repo  https://raw.githubusercontent.com/anishrana2001/Openshift/refs/heads/main/DO316/yum.repo-file.repo`
 - httpd services must be enabled after the reboot.
-- Download the anish.html file from "https://raw.githubusercontent.com/anishrana2001/Openshift/refs/heads/main/DO316/anish.html" and upload on `/var/www/html` on the VM.
+- Download the anish.html file from `https://raw.githubusercontent.com/anishrana2001/Openshift/refs/heads/main/DO316/anish.html` and upload on `/var/www/html` on the VM.
 - A Network Policy named `netpol-http` exists in the `banana` Project
 - A `Clusterlp Service` allows Web Traffic into the `myvm-lan1` VirtualMachine
 - The Network Policy Restricts access to the VirtualMachine `myvm-lan1` and allowing only the member of Project `banana` to access TCP port `80` 
