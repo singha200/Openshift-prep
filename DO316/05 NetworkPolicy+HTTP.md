@@ -6,7 +6,7 @@ oc apply -f https://raw.githubusercontent.com/anishrana2001/Openshift/refs/heads
 
 # Configure a Web Server in a VirtualMachine `myvm-lan1` in a `banana` project
 - Install the httpd package.
-- One can download the yum.repo file from "sudo curl -o /etc/yum.repos.d/yum.repo-file.repo  https://raw.githubusercontent.com/anishrana2001/Openshift/refs/heads/main/DO316/yum.repo-file.repo"
+- One can download the yum.repo file from `sudo curl -o /etc/yum.repos.d/yum.repo-file.repo  https://raw.githubusercontent.com/anishrana2001/Openshift/refs/heads/main/DO316/yum.repo-file.repo`
 - httpd services must be enabled after the reboot.
 - Download the anish.html file from "https://raw.githubusercontent.com/anishrana2001/Openshift/refs/heads/main/DO316/anish.html" and upload on `/var/www/html` on the VM.
 - A Network Policy named `netpol-http` exists in the `banana` Project
