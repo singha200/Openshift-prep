@@ -1,7 +1,21 @@
 apiVersion: template.openshift.io/v1
 kind: Template
 metadata:
-  name: vm-template
+  annotations:
+    defaults.template.kubevirt.io/disk: rootdisk
+    description: Template for Red Hat Enterprise Linux 9 VM or newer. A PVC with the
+      RHEL disk image must be available. web1 template
+    iconClass: icon-rhel
+    name.os.template.kubevirt.io/rhel9.0: Red Hat Enterprise Linux 9.0 or higher
+    name.os.template.kubevirt.io/rhel9.1: Red Hat Enterprise Linux 9.0 or higher
+    name.os.template.kubevirt.io/rhel9.2: Red Hat Enterprise Linux 9.0 or higher
+    name.os.template.kubevirt.io/rhel9.3: Red Hat Enterprise Linux 9.0 or higher
+    name.os.template.kubevirt.io/rhel9.4: Red Hat Enterprise Linux 9.0 or higher
+    name.os.template.kubevirt.io/rhel9.5: Red Hat Enterprise Linux 9.0 or higher
+    openshift.io/display-name: Red Hat Enterprise -web1 Template
+    openshift.io/documentation-url: https://github.com/kubevirt/common-templates
+    openshift.io/provider-display-name: Anish Rana EX316
+  name: web1-template
 objects:
 - apiVersion: kubevirt.io/v1
   kind: VirtualMachine
