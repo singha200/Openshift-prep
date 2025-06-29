@@ -14,7 +14,7 @@ metadata:
     name.os.template.kubevirt.io/rhel9.5: Red Hat Enterprise Linux 9.0 or higher
     openshift.io/display-name: Red Hat Enterprise -web1 Template
     openshift.io/documentation-url: https://github.com/kubevirt/common-templates
-    openshift.io/provider-display-name: Anish Rana EX316
+    openshift.io/provider-display-name: RedHat
     openshift.io/support-url: https://github.com/kubevirt/common-templates/issues
     openshift.kubevirt.io/pronounceable-suffix-for-name-expression: "true"
     operator-sdk/primary-resource: openshift-cnv/ssp-kubevirt-hyperconverged
@@ -57,15 +57,14 @@ metadata:
     vm.kubevirt.io/template.namespace: openshift
     workload.template.kubevirt.io/server: "true"
   name: web1-template
-  namespace: vm-image
+  namespace: openshift
+  resourceVersion: "1582214"
+  uid: 61499ef6-0357-4609-97de-35e853a7a3e4
 objects:
 - apiVersion: kubevirt.io/v1
   kind: VirtualMachine
   metadata:
     annotations:
-      kubemacpool.io/transaction-timestamp: "2025-06-29T07:28:34.284491636Z"
-      kubevirt.io/latest-observed-api-version: v1
-      kubevirt.io/storage-observed-api-version: v1
       vm.kubevirt.io/validations: |
         [
           {
@@ -76,31 +75,28 @@ objects:
             "min": 1610612736
           }
         ]
-    finalizers:
-    - kubevirt.io/virtualMachineControllerFinalize
-    generation: 2
     labels:
-      app: web1
+      app: ${NAME}
       kubevirt.io/dynamic-credentials-support: "true"
-      vm.kubevirt.io/template: replicated-template
-      vm.kubevirt.io/template.namespace: vm-image
+      vm.kubevirt.io/template: web1-template
+      vm.kubevirt.io/template.namespace: banana
       vm.kubevirt.io/template.revision: "1"
-    name: web1
-    namespace: vm-image
+    name: ${NAME}
   spec:
     dataVolumeTemplates:
-    - metadata:
-        name: web1-rootdisk
+    - apiVersion: cdi.kubevirt.io/v1beta1
+      kind: DataVolume
+      metadata:
+        name: ${NAME}
       spec:
-        preallocation: false
-        source:
-          http:
-            url: http://utility.lab.example.com:8080/openshift4/images/rhel9-helloworld.qcow2
+        sourceRef:
+          kind: DataSource
+          name: ${DATA_SOURCE_NAME}
+          namespace: ${DATA_SOURCE_NAMESPACE}
         storage:
           resources:
             requests:
-              storage: 15Gi
-          storageClassName: ocs-external-storagecluster-ceph-rbd-virtualization
+              storage: 30Gi
     running: false
     template:
       metadata:
@@ -108,11 +104,9 @@ objects:
           vm.kubevirt.io/flavor: small
           vm.kubevirt.io/os: rhel9
           vm.kubevirt.io/workload: server
-        creationTimestamp: null
         labels:
-          kubevirt.io/domain: web1
+          kubevirt.io/domain: ${NAME}
           kubevirt.io/size: small
-          network.kubevirt.io/headlessService: headless
       spec:
         architecture: amd64
         domain:
@@ -122,12 +116,10 @@ objects:
             threads: 1
           devices:
             disks:
-            - bootOrder: 1
-              disk:
+            - disk:
                 bus: virtio
               name: rootdisk
-            - bootOrder: 2
-              disk:
+            - disk:
                 bus: virtio
               name: cloudinitdisk
             interfaces:
@@ -136,61 +128,28 @@ objects:
               name: default
             rng: {}
           features:
-            acpi: {}
             smm:
               enabled: true
           firmware:
             bootloader:
               efi: {}
-          machine:
-            type: pc-q35-rhel9.4.0
           memory:
             guest: 2Gi
-          resources: {}
         networks:
         - name: default
           pod: {}
         terminationGracePeriodSeconds: 180
         volumes:
         - dataVolume:
-            name: web1-rootdisk
+            name: ${NAME}
           name: rootdisk
         - cloudInitNoCloud:
-            userData: |
+            userData: |-
               #cloud-config
               user: raja
               password: anishrana2001
-              chpasswd:
-                expire: false
+              chpasswd: { expire: False }
           name: cloudinitdisk
-  status:
-    conditions:
-    - lastProbeTime: "2025-06-29T07:28:40Z"
-      lastTransitionTime: "2025-06-29T07:28:40Z"
-      message: VMI does not exist
-      reason: VMINotExists
-      status: "False"
-      type: Ready
-    - lastProbeTime: null
-      lastTransitionTime: null
-      message: All of the VMI's DVs are bound and not running
-      reason: AllDVsReady
-      status: "True"
-      type: DataVolumesReady
-    - lastProbeTime: null
-      lastTransitionTime: null
-      status: "True"
-      type: LiveMigratable
-    desiredGeneration: 2
-    observedGeneration: 2
-    printableStatus: Stopped
-    runStrategy: Halted
-    volumeSnapshotStatuses:
-    - enabled: true
-      name: rootdisk
-    - enabled: false
-      name: cloudinitdisk
-      reason: Snapshot is not supported for this volumeSource type [cloudinitdisk]
 parameters:
 - description: VM name
   from: rhel9-[a-z0-9]{16}
@@ -202,3 +161,7 @@ parameters:
 - description: Namespace of the DataSource
   name: DATA_SOURCE_NAMESPACE
   value: openshift-virtualization-os-images
+- description: Randomized password for the cloud-init user cloud-user
+  from: '[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{4}'
+  generate: expression
+  name: CLOUD_USER_PASSWORD
