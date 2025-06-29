@@ -3,88 +3,135 @@ kind: Template
 metadata:
   name: vm-template
 objects:
-  - apiVersion: kubevirt.io/v1
-	kind: VirtualMachine
-    metadata:
-      annotations:
-        kubemacpool.io/transaction-timestamp: "2025-06-29T07:28:34.284491636Z"
-		kubevirt.io/latest-observed-api-version: v1
-		kubevirt.io/storage-observed-api-version: v1
-		vm.kubevirt.io/validations: |
-		  [
-			{
-			  "name": "minimal-required-memory",
-			  "path": "jsonpath::.spec.domain.memory.guest",
-			  "rule": "integer",
-			  "message": "This VM requires more memory.",
-			  "min": 1610612736
-			}
-		  ]
-	  finalizers:
-	  - kubevirt.io/virtualMachineControllerFinalize
-	  generation: 2
-	  labels:
-		app: web1
-		kubevirt.io/dynamic-credentials-support: "true"
-		vm.kubevirt.io/template: replicated-template
-		vm.kubevirt.io/template.namespace: vm-image
-		vm.kubevirt.io/template.revision: "1"
-	  name: web1
-	  namespace: vm-image
-	spec:
-	  dataVolumeTemplates:
-	  - metadata:
-		  name: web1-rootdisk
-		spec:
-		  preallocation: false
-		  source:
-			http:
-			  url: http://utility.lab.example.com:8080/openshift4/images/rhel9-helloworld.qcow2
-		  storage:
-			resources:
-			  requests:
-				storage: 15Gi
-			storageClassName: ocs-external-storagecluster-ceph-rbd-virtualization
-	  running: false
-	  template:
-		metadata:
-		  annotations:
-			vm.kubevirt.io/flavor: small
-			vm.kubevirt.io/os: rhel9
-			vm.kubevirt.io/workload: server
-		  creationTimestamp: null
-		  labels:
-			kubevirt.io/domain: web1
-			kubevirt.io/size: small
-			network.kubevirt.io/headlessService: headless
-		spec:
-		  architecture: amd64
-		  domain:
-			cpu:
-			  cores: 1
-			  sockets: 1
-			  threads: 1
-			devices:
-			  disks:
-			  - bootOrder: 1
-				disk:
-				  bus: virtio
-				name: rootdisk
-			  - bootOrder: 2
-				disk:
-				  bus: virtio
-				name: cloudinitdisk
-			  interfaces:
-			  - masquerade: {}
-				model: virtio
-				name: default
-			  rng: {}
-			features:
-			  acpi: {}
-			  smm:
-				enabled: true
-			firmware:
-			  bootloader:
-				efi: {}
-			machine:
-			  type: pc-q35-rhel9.4.0
+- apiVersion: kubevirt.io/v1
+  kind: VirtualMachine
+  metadata:
+    annotations:
+      kubemacpool.io/transaction-timestamp: "2025-06-29T07:28:34.284491636Z"
+      kubevirt.io/latest-observed-api-version: v1
+      kubevirt.io/storage-observed-api-version: v1
+      vm.kubevirt.io/validations: |
+        [
+          {
+            "name": "minimal-required-memory",
+            "path": "jsonpath::.spec.domain.memory.guest",
+            "rule": "integer",
+            "message": "This VM requires more memory.",
+            "min": 1610612736
+          }
+        ]
+    finalizers:
+    - kubevirt.io/virtualMachineControllerFinalize
+    generation: 2
+    labels:
+      app: web1
+      kubevirt.io/dynamic-credentials-support: "true"
+      vm.kubevirt.io/template: replicated-template
+      vm.kubevirt.io/template.namespace: vm-image
+      vm.kubevirt.io/template.revision: "1"
+    name: web1
+    namespace: vm-image
+  spec:
+    dataVolumeTemplates:
+    - metadata:
+        name: web1-rootdisk
+      spec:
+        preallocation: false
+        source:
+          http:
+            url: http://utility.lab.example.com:8080/openshift4/images/rhel9-helloworld.qcow2
+        storage:
+          resources:
+            requests:
+              storage: 15Gi
+          storageClassName: ocs-external-storagecluster-ceph-rbd-virtualization
+    running: false
+    template:
+      metadata:
+        annotations:
+          vm.kubevirt.io/flavor: small
+          vm.kubevirt.io/os: rhel9
+          vm.kubevirt.io/workload: server
+        creationTimestamp: null
+        labels:
+          kubevirt.io/domain: web1
+          kubevirt.io/size: small
+          network.kubevirt.io/headlessService: headless
+      spec:
+        architecture: amd64
+        domain:
+          cpu:
+            cores: 1
+            sockets: 1
+            threads: 1
+          devices:
+            disks:
+            - bootOrder: 1
+              disk:
+                bus: virtio
+              name: rootdisk
+            - bootOrder: 2
+              disk:
+                bus: virtio
+              name: cloudinitdisk
+            interfaces:
+            - masquerade: {}
+              model: virtio
+              name: default
+            rng: {}
+          features:
+            acpi: {}
+            smm:
+              enabled: true
+          firmware:
+            bootloader:
+              efi: {}
+          machine:
+            type: pc-q35-rhel9.4.0
+          memory:
+            guest: 2Gi
+          resources: {}
+        networks:
+        - name: default
+          pod: {}
+        terminationGracePeriodSeconds: 180
+        volumes:
+        - dataVolume:
+            name: web1-rootdisk
+          name: rootdisk
+        - cloudInitNoCloud:
+            userData: |
+              #cloud-config
+              user: raja
+              password: anishrana2001
+              chpasswd:
+                expire: false
+          name: cloudinitdisk
+  status:
+    conditions:
+    - lastProbeTime: "2025-06-29T07:28:40Z"
+      lastTransitionTime: "2025-06-29T07:28:40Z"
+      message: VMI does not exist
+      reason: VMINotExists
+      status: "False"
+      type: Ready
+    - lastProbeTime: null
+      lastTransitionTime: null
+      message: All of the VMI's DVs are bound and not running
+      reason: AllDVsReady
+      status: "True"
+      type: DataVolumesReady
+    - lastProbeTime: null
+      lastTransitionTime: null
+      status: "True"
+      type: LiveMigratable
+    desiredGeneration: 2
+    observedGeneration: 2
+    printableStatus: Stopped
+    runStrategy: Halted
+    volumeSnapshotStatuses:
+    - enabled: true
+      name: rootdisk
+    - enabled: false
+      name: cloudinitdisk
+      reason: Snapshot is not supported for this volumeSource type [cloudinitdisk]
