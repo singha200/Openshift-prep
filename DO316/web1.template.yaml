@@ -16,6 +16,7 @@ metadata:
     openshift.io/documentation-url: https://github.com/kubevirt/common-templates
     openshift.io/provider-display-name: Anish Rana EX316
   name: web1-template
+  namespace: vm-image
 objects:
 - apiVersion: kubevirt.io/v1
   kind: VirtualMachine
