@@ -150,3 +150,14 @@ objects:
     - enabled: false
       name: cloudinitdisk
       reason: Snapshot is not supported for this volumeSource type [cloudinitdisk]
+parameters:
+- description: VM name
+  from: rhel9-[a-z0-9]{16}
+  generate: expression
+  name: NAME
+- description: Name of the DataSource to clone
+  name: DATA_SOURCE_NAME
+  value: rhel9
+- description: Namespace of the DataSource
+  name: DATA_SOURCE_NAMESPACE
+  value: openshift-virtualization-os-images
