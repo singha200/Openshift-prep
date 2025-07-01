@@ -3,7 +3,7 @@
 ```
 lab start accessing-guicreate
 oc login -u admin -p redhatocp https://api.ocp4.example.com:6443
-sudo ssh-keygen -t rsa -q -f /home/student/.ssh/id_rsa  -N ""
+ssh-keygen -t rsa -q -f /home/student/.ssh/id_rsa  -N ""
 
 ```
 
