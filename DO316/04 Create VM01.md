@@ -3,8 +3,8 @@
 ```
 lab start accessing-guicreate
 oc login -u admin -p redhatocp https://api.ocp4.example.com:6443
-sudo ssh-keygen -t rsa -q -f "/home/devops/.ssh/id_rsa" -N ""
-oc create secret generic ssh-key --from-file=public-key=/tmp/devops-id_rsa.pub -n banana
+sudo ssh-keygen -t rsa -q -f /home/student/.ssh/id_rsa  -N ""
+oc create secret generic ssh-key --from-file=public-key=/home/student/.ssh/id_rsa.pub -n banana
 ```
 
 # Create a VirtualMachine in the `banana` project with below requirements. 
