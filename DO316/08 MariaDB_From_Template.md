@@ -4,7 +4,7 @@
   - The Template is clone of the build-in rhel9-server-small template
   - Flavor small, with 1 CPU and 2Gi RAM
   - Storage space is 10Gi
-  - Disk source rhel-9.2-x86_64-kvm.qcow2 provided at  http://utility.lab.example.com:8080/openshift4/images/mariadb-server.qcow2
+  - Disk source  `http://utility.lab.example.com:8080/openshift4/images/rhel9-helloworld.qcow2`
   - storageCLassName: `ocs-external-storagecluster-ceph-rbd-virtualization`
   - The user `rahul` can login to these VirtualMachines on the console with password `anishrana2001`
   - The user `rahul` should have SSH password less authication on VM  by using `/home/opsdam/.ssh/id_rsa_ex316.pub key` from the base machine.
