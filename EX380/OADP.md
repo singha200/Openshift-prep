@@ -1,5 +1,5 @@
 
-Task: You need to install the OADP operator and create `ObjectBucketClaim` named `backup` in the `openshift-adp` namespace
+# Task: You need to install the OADP operator and create `ObjectBucketClaim` named `backup` in the `openshift-adp` namespace
 
 
 ### Login via admin user.
@@ -8,7 +8,7 @@ oc login -u admin -p redhatocp  https://api.ocp4.example.com:6443
 ```
 
 ### Identify the URL for the OpenShift web console.
-``
+```
 oc whoami --show-console
 ```
 ### For your references.
