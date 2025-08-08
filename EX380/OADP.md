@@ -1,12 +1,14 @@
 
 # Task: You need to install the OADP operator and create `ObjectBucketClaim` named `backup` in the `openshift-adp` namespace
-#### Once, it installed, Create an S3-compatible objectstoragebucket named `backup` for OADP to store backups in the `openshift-adp` namespace. Use StorageClass name `openshift-storage.noobaa.io`
+## Once, it installed, Create an S3-compatible objectstoragebucket named `backup` for OADP to store backups in the `openshift-adp` namespace. Use StorageClass name `openshift-storage.noobaa.io`
 
 ## You can use the sample file :
 ```
 https://raw.githubusercontent.com/anishrana2001/Openshift/refs/heads/main/EX380/ObjectBucketClaim.yaml
 ```
+---
 
+### Solution
 ### Login via admin user.
 ```
 oc login -u admin -p redhatocp  https://api.ocp4.example.com:6443
