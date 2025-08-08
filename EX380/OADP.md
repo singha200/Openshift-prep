@@ -23,10 +23,13 @@ https://console-openshift-console.apps.ocp4.example.com
 <img width="900" height="600" alt="image" src="https://github.com/user-attachments/assets/f93cd5a6-1e8b-4e02-8cd3-a5fc61de7e8c" />
 
 
-#### Once, it installed, Create an S3-compatible object storage bucket for OADP to store backups.
+#### Once, it installed, Create an S3-compatible objectstoragebucket named `backup` for OADP to store backups in the `openshift-adp` namespace. Use StorageClass name `openshift-storage.noobaa.io`
+
+## You can use the sample file :
 ```
-curl http://
+https://raw.githubusercontent.com/anishrana2001/Openshift/refs/heads/main/EX380/ObjectBucketClaim.yaml
 ```
+
 ```
 oc apply -f backup.yaml 
 ```
