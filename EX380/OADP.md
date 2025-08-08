@@ -40,7 +40,7 @@ oc apply -f backup.yaml
 
 ### For your references.
 ```
-[student@workstation ~]$ cat backup.yaml
+[student@workstation ~]$ cat ObjectBucketClaim.yaml
 apiVersion: objectbucket.io/v1alpha1
 kind: ObjectBucketClaim
 metadata:
@@ -51,7 +51,7 @@ spec:
   generateBucketName: backup                         ### Modified
 [student@workstation ~]$ 
 
-[student@workstation ~]$ oc apply -f backup.yaml 
+[student@workstation ~]$ oc apply -f ObjectBucketClaim.yaml 
 objectbucketclaim.objectbucket.io/backup created
 [student@workstation ~]$ oc get obc
 NAME     STORAGE-CLASS                 PHASE   AGE
