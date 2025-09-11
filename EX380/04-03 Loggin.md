@@ -211,3 +211,10 @@ parameters:
     value: "openshift-logging"
 [student@workstation logging-forward]$
 ```
+
+
+### How to clear the lab?
+```
+oc delete -f logforward.yaml
+lab finish logging-forward
+```
