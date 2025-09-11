@@ -216,7 +216,7 @@ total 28
   oc config set-credentials NAME [--client-certificate=path/to/certfile] [--client-key=path/to/keyfile] [--token=bearer_token] [--username=basic_user] [--password=basic_password] [--auth-provider=provider_name] [--auth-provider-arg=key=value] [--exec-command=exec_command] [--exec-api-version=exec_api_version] [--exec-arg=arg] [--exec-env=key=value] [options]
 
 
-[student@workstation test]$ oc config set-credentials mon-punit --client-certificate=my-client.crt --client-key=monitoing.key --embed-certs=true --kubeconfig mon-project.config
+[student@workstation test]$ oc config set-credentials mon-punit --client-certificate=my-client.crt --client-key=monitoing.key --embed-certs --kubeconfig mon-project.config
 User "mon-punit" set.
 [student@workstation test]$
 
@@ -242,8 +242,8 @@ contexts:
     cluster: api-ocp4-example-com:6443
     user: kristendelgado/api-ocp4-example-com:6443
   name: /api-ocp4-example-com:6443/kristendelgado
-[student@workstation test]$ 
-[student@workstation test]$ 
+
+
 [student@workstation test]$ oc config set-cluster -h | grep cert
   # Embed certificate authority data for the e2e cluster entry
   oc config set-cluster e2e --embed-certs --certificate-authority=~/.kube/e2e/kubernetes.ca.crt
@@ -253,8 +253,8 @@ contexts:
     --embed-certs=false:
         embed-certs for the cluster entry in kubeconfig
   oc config set-cluster NAME [--server=server] [--certificate-authority=path/to/certificate/authority] [--insecure-skip-tls-verify=true] [--tls-server-name=example.com] [options]
-[student@workstation test]$ 
-[student@workstation test]$ 
+
+
 [student@workstation test]$ oc config set-cluster api-ocp4-example-com:6443 --server=https://api.ocp4.example.com:6443 --certificate-authority=my-api.crt --embed-certs=true --kubeconfig mon-project.config 
 Cluster "api-ocp4-example-com:6443" set.
 [student@workstation test]$ 
@@ -304,14 +304,13 @@ Context "mon-punit" created.
 
 [student@workstation test]$ oc config use-context mon-punit --kubeconfig mon-project.config 
 Switched to context "mon-punit".
-[student@workstation test]$ oc whoami --kubeconfig mon-project.config 
-error: tls: private key does not match public key
+[student@workstation test]$ oc whoami --kubeconfig kubeconfig-mon-project.config
+mon-punit
 [student@workstation test]$
 
 
 
-[student@workstation test]$ oc auth can-i get users -A \
-  --as admin-backdoor --as-group cluster-monitoring-app 
+[student@workstation test]$ oc auth can-i get users -A --as admin-backdoor --as-group cluster-monitoring-app 
 yes
 [student@workstation test]$ oc auth can-i delete users -A   --as admin-backdoor --as-group cluster-monitoring-app 
 no
