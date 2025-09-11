@@ -197,13 +197,15 @@ dg==
 
 ```
 [student@workstation test]$ ls -ltr
-total 16
+total 28
 -rw-r--r--. 1 student student 1630 Sep 10 23:57 mon-csr
 -rw-------. 1 student student 3272 Sep 10 23:59 monitoing.key
 -rw-r--r--. 1 student student 2428 Sep 11 00:13 dummy-csr.yaml
 -rw-r--r--. 1 student student 1505 Sep 11 00:19 my-client.crt
-[student@workstation test]$ 
-[student@workstation test]$ 
+-rw-r--r--. 1 student student 1749 Sep 11 00:39 my-api.crt
+[student@workstation test]$
+
+
 [student@workstation test]$ oc config set-credentials -h | grep cert
   Client-certificate flags:
   --client-certificate=certfile --client-key=keyfile
@@ -222,4 +224,98 @@ User "mon-punit" set.
 
 
 
+
+[student@workstation test]$ ls -ltr
+total 28
+-rw-r--r--. 1 student student 1630 Sep 10 23:57 mon-csr
+-rw-------. 1 student student 3272 Sep 10 23:59 monitoing.key
+-rw-r--r--. 1 student student 2428 Sep 11 00:13 dummy-csr.yaml
+-rw-r--r--. 1 student student 1505 Sep 11 00:19 my-client.crt
+-rw-------. 1 student student 6551 Sep 11 00:27 mon-project.config
+-rw-r--r--. 1 student student 1749 Sep 11 00:39 my-api.crt
+[student@workstation test]$ 
+[student@workstation test]$ oc config view | headapiVersion: v1
+clusters:
+- cluster:
+    server: https://api.ocp4.example.com:6443
+  name: api-ocp4-example-com:6443
+contexts:
+- context:
+    cluster: api-ocp4-example-com:6443
+    user: kristendelgado/api-ocp4-example-com:6443
+  name: /api-ocp4-example-com:6443/kristendelgado
+[student@workstation test]$ 
+[student@workstation test]$ 
+[student@workstation test]$ oc config set-cluster -h | grep cert
+  # Embed certificate authority data for the e2e cluster entry
+  oc config set-cluster e2e --embed-certs --certificate-authority=~/.kube/e2e/kubernetes.ca.crt
+  # Disable cert checking for the e2e cluster entry
+    --certificate-authority='':
+        Path to certificate-authority file for the cluster entry in kubeconfig
+    --embed-certs=false:
+        embed-certs for the cluster entry in kubeconfig
+  oc config set-cluster NAME [--server=server] [--certificate-authority=path/to/certificate/authority] [--insecure-skip-tls-verify=true] [--tls-server-name=example.com] [options]
+[student@workstation test]$ 
+[student@workstation test]$ 
+[student@workstation test]$ oc config set-cluster api-ocp4-example-com:6443 --server=https://api.ocp4.example.com:6443 --certificate-authority=my-api.crt --embed-certs=true --kubeconfig mon-project.config 
+Cluster "api-ocp4-example-com:6443" set.
+[student@workstation test]$ 
+
+
+
+
+
+[student@workstation test]$ ls -ltrtotal 32
+-rw-r--r--. 1 student student 1630 Sep 10 23:57 mon-csr
+-rw-------. 1 student student 3272 Sep 10 23:59 monitoing.key
+-rw-r--r--. 1 student student 2428 Sep 11 00:13 dummy-csr.yaml
+-rw-r--r--. 1 student student 1505 Sep 11 00:19 my-client.crt
+-rw-r--r--. 1 student student 1749 Sep 11 00:39 my-api.crt
+-rw-------. 1 student student 9002 Sep 11 00:54 mon-project.config
+[student@workstation test]$ 
+[student@workstation test]$ 
+[student@workstation test]$ oc config view | headapiVersion: v1
+clusters:
+- cluster:
+    server: https://api.ocp4.example.com:6443
+  name: api-ocp4-example-com:6443
+contexts:
+- context:
+    cluster: api-ocp4-example-com:6443
+    user: kristendelgado/api-ocp4-example-com:6443
+  name: /api-ocp4-example-com:6443/kristendelgado
+[student@workstation test]$ 
+[student@workstation test]$ 
+[student@workstation test]$ 
+[student@workstation test]$ oc config set-context -h | tail
+    --namespace='':
+        namespace for the context entry in kubeconfig
+
+    --user='':
+        user for the context entry in kubeconfig
+
+Usage:
+  oc config set-context [NAME | --current] [--cluster=cluster_nickname] [--user=user_nickname] [--namespace=namespace] [options]
+
+Use "oc options" for a list of global command-line options (applies to all commands).
+[student@workstation test]$ oc config set-context mon-punit --cluster=api-ocp4-example-com:6443 --namespace=default --user=mon-punit --kubeconfig mon-project.config 
+Context "mon-punit" created.
+[student@workstation test]$
+
+
+
+[student@workstation test]$ oc config use-context mon-punit --kubeconfig mon-project.config 
+Switched to context "mon-punit".
+[student@workstation test]$ oc whoami --kubeconfig mon-project.config 
+error: tls: private key does not match public key
+[student@workstation test]$
+
+
+
+[student@workstation test]$ oc auth can-i get users -A \
+  --as admin-backdoor --as-group cluster-monitoring-app 
+yes
+[student@workstation test]$ oc auth can-i delete users -A   --as admin-backdoor --as-group cluster-monitoring-app 
+no
+[student@workstation test]$ 
 
