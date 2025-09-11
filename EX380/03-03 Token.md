@@ -13,9 +13,11 @@ For this, you need to create a client certificate that allows the `punit` user t
 - The client certificate you can download from below link.
 - The client certificate must not be able to create or delete projects
 - The client certificate must be able to view all pods in the cluster
+
+
+## You can download the dummy csr file from below link.
+https://raw.githubusercontent.com/anishrana2001/Openshift/refs/heads/main/EX380/dummy-csr-0303-token.yaml
 ---
-
-
 ## Solution:
 
 ```
