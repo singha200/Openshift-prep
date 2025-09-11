@@ -1,6 +1,6 @@
 ## Prepare the lab.
 ```
-oc create sa sa-monitoring-user
+
 ```
 
 
