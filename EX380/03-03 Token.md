@@ -128,9 +128,7 @@ NAME           AGE   SIGNERNAME                            REQUESTOR   REQUESTED
 mon-cert-csr   81s   kubernetes.io/kube-apiserver-client   admin       7d                  Approved,Issued
 [student@workstation test]$ 
 ```
-
-## Capture API certificate..
-
+### From the Approved CSR, we can get the issued client certificate.
 ```
 [student@workstation test]$ oc get csr -o yaml | grep -i certif | grep -v api
   kind: CertificateSigningRequest
