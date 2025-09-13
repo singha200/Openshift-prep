@@ -21,7 +21,7 @@ lab start logging-forward
   - All logs are tagged with `appName: ocp-lab`
   - All logs are tagged with `msgID: audit`
 ---
-  - Deploy the Event Router component to capture Kubernetes events.
+# Deploy the Event Router component to capture Kubernetes events.
 
 # The syslog servers have already been fully configured for you to receive logging messages and filter them using the 'msgID' attribute to the following files:
 
