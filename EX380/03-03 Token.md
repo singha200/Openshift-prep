@@ -310,9 +310,9 @@ mon-punit
 
 
 
-[student@workstation test]$ oc auth can-i get users -A --as admin-backdoor --as-group cluster-monitoring-app 
+[student@workstation test]$ oc auth can-i get users -A --as=mon-punit --as-group=cluster-monitoring-app
 yes
-[student@workstation test]$ oc auth can-i delete users -A   --as admin-backdoor --as-group cluster-monitoring-app 
+[student@workstation test]$ oc auth can-i delete users -A --as=mon-punit --as-group=cluster-monitoring-app
 no
 [student@workstation test]$ 
 
