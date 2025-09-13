@@ -226,5 +226,102 @@ status:
 ```
 
 
+### Create a public repository in the classroom GitLab.
+
+## Open a web browser and navigate to https://git.ocp4.example.com. Log in as the developer user with `d3v3lop3r` as the password.
+
+## Click New project, and then click 'Create blank project'. Use 'gitops-admin' as the project slug (repository name), select the 'Public' visibility level, and use the default values for all other fields. Click 'Create project'.
+	
+
+```
+[student@workstation ~]$ mkdir test
+[student@workstation ~]$ cd test/
+[student@workstation test]$ git clone https://git.ocp4.example.com/developer/gitops-admin.git
+Cloning into 'gitops-admin'...
+remote: Enumerating objects: 3, done.
+remote: Counting objects: 100% (3/3), done.
+remote: Compressing objects: 100% (2/2), done.
+remote: Total 3 (delta 0), reused 0 (delta 0), pack-reused 0
+Receiving objects: 100% (3/3), done.
+[student@workstation test]$ ls -ltr
+total 0
+drwxr-xr-x. 3 student student 35 Aug 31 04:04 gitops-admin
+[student@workstation test]$ cd gitops-admin/
+[student@workstation gitops-admin]$ ls -ltr
+total 8
+-rw-r--r--. 1 student student 6200 Aug 31 04:04 README.md
+[student@workstation gitops-admin]$ 
+
+```
+
+
+[student@workstation gitops-admin]$ cat console.yaml 
+apiVersion: operator.openshift.io/v1
+kind: Console
+metadata:
+  name: cluster
+  annotations:
+    argocd.argoproj.io/sync-options: ServerSideApply=true,Validate=false
+spec:
+  customization:
+    customProductName: Production
+[student@workstation gitops-admin]$ 
+
+
+[student@workstation gitops-admin]$ git add console.yaml
+
+[student@workstation gitops-admin]$ git commit -m "anish.rana" 
+[main a4e8208] anish.rana
+ Committer: Student User <student@workstation.lab.example.com>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly. Run the
+following command and follow the instructions in your editor to edit
+your configuration file:
+
+    git config --global --edit
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 9 insertions(+)
+ create mode 100644 console.yaml
+
+
+[student@workstation gitops-admin]$ git push
+Username for 'https://git.ocp4.example.com': developer 
+Password for 'https://developer@git.ocp4.example.com':     "d3v3lop3r"
+Enumerating objects: 4, done.
+Counting objects: 100% (4/4), done.
+Delta compression using up to 2 threads
+Compressing objects: 100% (3/3), done.
+Writing objects: 100% (3/3), 450 bytes | 450.00 KiB/s, done.
+Total 3 (delta 0), reused 0 (delta 0), pack-reused 0
+To https://git.ocp4.example.com/developer/gitops-admin.git
+   b04a255..a4e8208  main -> main
+   
+   
+## Log in to the Argo CD web console as the admin user.
+
+###    Go back to the Argo CD browser tab.
+
+###    Click LOG IN VIA OPENSHIFT, and then click Red Hat Identity Management. Log in as the admin user with redhatocp as the password, and then allow the user:info permission.
+
+### Create an application with the repository and observe the results.
+
+###    Click CREATE APPLICATION.
+```
+    Create an application with the information in the following table:
+    Field 	Value
+    Application Name	gitops-admin
+    Project Name	default
+    Retry	Checked
+    Repository URL	https://git.ocp4.example.com/developer/gitops-admin.git
+    Path	.
+    Cluster URL	https://kubernetes.default.svc
+```
+###  Then, click CREATE.
+
 
 
