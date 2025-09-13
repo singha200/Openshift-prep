@@ -30,8 +30,9 @@ lab start logging-forward
   - `/var/log/audit.log`
 
 # You may verify that the audit logs from the cluster nodes are forwarded to the syslog server by login into the 'utility' server with 'root' username. 
+`ssh root@utility`
 
-# You can login Other to one master01 node to check the logs. 
+# You can login to one master01 node to check the logs. 
 - `ssh core@master01.ocp4.example.com`
 ---
 
