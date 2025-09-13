@@ -25,9 +25,9 @@ lab start logging-forward
 
 # The syslog servers have already been fully configured for you to receive logging messages and filter them using the 'msgID' attribute to the following files:
 
-  - `/var/log/app.log`
-  - `/var/log/infra.log`
-  - `/var/log/audit.log`
+  - `/var/log/openshift/app.log`
+  - `/var/log/openshift/infra.log`
+  - `/var/log/openshift/audit.log`
 
 # You may verify that the audit logs from the cluster nodes are forwarded to the syslog server by login into the 'utility' server with 'root' username. 
 `ssh root@utility`
