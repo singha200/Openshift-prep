@@ -4,8 +4,8 @@
 ## You task is to deploy the `OpenShift GitOps operator` according to the following requirements:
 - The operator must install in the `openshift-gitops-operator` project.
 - The ArgoCD instance must be `TLS` enabled with `reencrypt` termination.
-- User `punit` is a member of the `admins-team` group.
-- The `admins-team` group is the only group configured as `role:admin` with RBAC key policy.
+- User `punit` is a member of the `ocpadmins` group.
+- The `ocpadmins` group is the only group configured as `role:admin` with RBAC key policy.
 - An ArgoCD instance Git repository exists at `https://git.ocp4.example.com/` with skip server verification enabled. User `developer` user with `d3v3lop3r` as the password.
 - Create a new project with name `machineconfig` and it should be `Public` in the visibility level.
 - An application named `mach-config-motd-deploy` mnust be exists in the Git repository with the Sync Policy configured as `Manual`.
