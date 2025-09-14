@@ -1,0 +1,157 @@
+Storage classes are cluster scoped 
+
+# 9 Collect OpenShift config files for support (Very imp)
+❯ oc adm must-gather 
+
+
+A job resource executes a one-time task on the cluster via a pod. The cluster retries the job until it succeeds, or it retries a specified number of attempts.
+Resources are organized into projects and are selected via labels.
+A route connects a public-facing IP address and a DNS hostname to an internal-facing service IP address. Services provide network access between pods, whereas routes provide network access to pods from users and applications outside the RHOCP cluster.
+
+
+oc login https://api.ocp4.example.com:6443 -u user -p password
+oc cluster-info
+oc api-versions
+oc get clusteroperator
+oc get all
+oc describe mysql-openshift-1-glgrp
+oc explain pods.spec.containers.resources
+oc login --token=sha256-BW...rA8 --server=https://api.ocp4.example.com:6443
+oc api-resources --namespaced=true --api-group apps --sort-by name -> get api resources
+oc explain pod - explain the man page for the command
+oc get pods -o yaml - output the yaml file for the resources
+oc get pods -o yaml | yq r - 'items[0].status.podIP' -> yq to parse and filter output from yaml
+oc get pods -o json | jq '.items[0].status.podIP' -> jq to parse and filter output from yaml
+oc get pods -o custom-columns=PodName:".metadata.name", ContainerName:"spec.containers[].name", Phase:"status.phase", IP:"status.podIP",Ports:"spec.containers[].ports[].containerPort" -> custom output
+oc api-resources --namespaced -> Use the --namespaced option to limit the output of the api-resources command to namespaced resources.
+oc api-resources --namespaced=false -> Limit the output of the api-resources command to non-namespaced resources.
+oc api-resources --api-group config.openshift.io -> 
+
+Operator related commands 
+oc get clusteroperators
+oc get pod -n openshift-dns-operator dns-operator-64688bfdd4-8zklh -o json | jq .status
+
+Admin related commands
+oc adm top pods -A --sum
+oc adm top pods etcd-master01 -n openshift-etcd --containers
+oc get events -n openshift-kube-controller-manager
+oc get node master01 -o json | jq '.status.conditions'
+oc adm node-logs master01 -u crio --tail 1
+oc debug job/test --as-user=1000000
+oc get pod -n openshift-apiserver-operator openshift-apiserver-operator-7ddc8958fb-7m2kr -o json | jq .status
+oc get pods -n openshift-etcd --show-labels
+oc logs alertmanager-main-0 -n openshift-monitoring
+
+Alerts 
+oc get all -n openshift-monitoring --show-kind
+oc -n openshift-monitoring exec -c prometheus prometheus-k8s-0 -- curl -s   'http://localhost:9090/api/v1/alerts' | jq
+oc -n openshift-monitoring exec -c alertmanager alertmanager-main-0 -- curl -s  'http://localhost:9093/api/v1/alerts' | jq
+
+Check Node Status
+oc cluster-info
+oc get nodes
+oc get node master01 -o jsonpath=*'{"Allocatable:\n"}{.status.allocatable}{"\n\n"}{"Capacity:\n"}{.status.capacity}{"\n"}'
+
+
+Skopeo (manipulating, inspecting, signing, and transferring container images and image repositories on Linux)
+skopeo login registry.ocp4.example.com:8443 
+skopeo list-tags docker://registry.ocp4.example.com:8443/redhattraining/docker-nginx
+
+
+Run containers 
+oc run docker-nginx --image registry.ocp4.example.com:8443/redhattraining/docker-nginx:1.23
+oc get pods
+
+
+Troubleshooting container task 
+skopeo login registry -u user -p password 
+skopeo inspect docker://registry (to know valid tags)
+oc edit pods (update the correct version )
+oc cp ~/host/test mysql-server:/tmp/
+oc exec -it pod/mysql-server -- ls -la /tmp/
+oc rsh mysql-server
+
+
+Deploy application from templates 
+oc new-app -l team=red --template mysql-persistent \
+  -p MYSQL_USER=developer \
+  -p MYSQL_PASSWORD=developer
+
+# 1. create a job and fix failed deployment for sql by setting env variable 
+oc create deployment my-db --image registry.ocp4.example.com:8443/rhel9/mysql-80:1
+oc set env deployment/my-db MYSQL_USER=developer MYSQL_PASSWORD=developer MYSQL_DATABASE=sampledb
+oc run -it db-test --restart=Never --image registry.ocp4.example.com:8443/rhel9/mysql-80:1 -- mysql sampledb -h 10.8.0.91 -u developer --password=developer -e "select 1;"
+oc create job date-loop --image registry.ocp4.example.com:8443/ubi9/ubi -- /bin/bash -c "for i in {1..30}; do date; done"
+
+# 2. expose(create service) a deployment 
+oc expose deployment/db-pod
+oc get endpoints
+oc get pods --selector app=db-pod -o wide
+nc -z db-pod.deploy-services 3306 && echo "Connection success to db-pod.deploy-services:3306" || echo "Connection failed"
+
+# 3 Expose a deployment and set the --rule option , set the env 
+oc create deployment mysql-app --image registry.ocp4.example.com:8443/redhattraining/mysql-app:v1
+oc logs mysql-app-75dfd58f99-5xfqc
+oc set env deployment/mysql-app MYSQL_USER=redhat MYSQL_PASSWORD=redhat123 MYSQL_DATABASE=world_x
+oc exec -it mysql-app-57c44f646-5qt2k -- /bin/bash -c "mysql -uredhat -predhat123 </tmp/world_x.sql"
+oc rsh mysql-app-57c44f646-5qt2k
+mysql -uredhat -predhat123 world_x
+oc expose deployment mysql-app --name mysql-service --port 3306 --target-port 3306
+oc expose deployment sakila-app --name sakila-svc --port 8080 --target-port 8080 (port is service port and target port is the container port)
+oc expose service satir-svc --name satir
+oc create ingress ingr-sakila --rule "ingr-sakila.apps.ocp4.example.com/*=sakila-svc:8080"
+
+# 4 Create configmap and mount volume so that pod can use those configmaps (Provision Persistent Data Volumes)
+Provide applications with persistent storage volumes for block and file-based data.
+oc set volume deployment/webconfig --add --type configmap --configmap-name webfiles --name webfiles-vol --mount-path /var/www/html/
+
+Deploy a MySQL database with persistent storage from a PVC. Identify the PV that backs the application. Identify the storage provisioner that created the PV
+oc set volumes deployment/db-pod --add --type pvc --mount-path /var/lib/mysql --name db-pod-vol --claim-name db-pod-pvc
+
+Deploy a MySQL database with persistent storage based on block storage by selecting block storage instead of a default file storage.
+oc get sc
+oc describe sc lvms-vg1
+oc set volumes deployment/db-pod --add --name lvm-storage --type pvc --claim-mode rwo --claim-size 1Gi --mount-path /var/lib/mysql --claim-class lvms-vg1 --claim-name db-pod-pvc
+
+# 5 Manage Non-shared Storage with Stateful Sets
+Deploy a web server with persistent storage.Add data to the persistent storage.Scale the web server deployment and observe the data that is shared with the replicas.Create a database server with a stateful set by using a YAML manifest file.Verify that each instance from the stateful set has a persistent volume claim.
+
+oc create deployment web-server --image registry.ocp4.example.com:8443/redhattraining/hello-world-nginx:latest
+oc get pods -l app=web-server
+oc set volumes deployment/web-server --add --name web-pv --type persistentVolumeClaim --claim-mode rwo --claim-size 5Gi --mount-path /usr/share/nginx/html --claim-name web-pv-claim
+oc exec -it pod/web-server-64689877c6-mdr6f -- /bin/bash -c 'echo "Hello, World from ${HOSTNAME}" > /usr/share/nginx/html/index.html'
+oc scale deployment web-server --replicas 2
+oc exec -it pod/web-server-64689877c6-mbj6g -- cat /usr/share/nginx/html/index.html
+oc exec -it pod/web-server-64689877c6-mdr6f -- cat /usr/share/nginx/html/index.html
+
+# 6 Reliability of pods 
+Application Health Probes - readiness(failed endpoints removed from service), liveliness probe, startup probe
+
+# 7 Reserve Compute Capacity for Applications
+resources use limits and request for reserving the capacity
+oc adm top pods
+
+# 8 deploy through resource manifests 
+oc apply -f . --validate=true --dry-run=server
+Force the exoplanets application to restart, to flush out any stale configuration data.
+oc rollout restart deployment/database
+
+# 9 Collect OpenShift config files for support (Very imp)
+❯ oc adm must-gather 
+
+# 10 Templates creation and edit 
+
+oc get templates -n openshift 
+oc process --parameters mysql-persistent -n openshift - to see template parameters 
+oc new-app <template-name> -p mysql_user=user -p mysql_password=password (create app from temnplate by providing the parameters )
+oc new-app <template-name> --param-file=roster-parameter.env
+
+# 11 Helm 
+helm repo list
+helm repo add do280-repo http://helm.ocp4.example.com/charts
+helm search repo --versions
+helm show values do280-repo/etherpad --version 0.0.6
+helm install example-app do280-repo/etherpad -f values.yaml --version 0.0.6
+helm list
+helm search repo --versions
+helm upgrade example-app do280-repo/etherpad -f values.yaml --version 0.0.7
