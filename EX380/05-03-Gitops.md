@@ -7,9 +7,10 @@
 - User `punit` is a member of the `admins-team` group.
 - The `admins-team` group is the only group configured as `role:admin` with RBAC key policy.
 - An ArgoCD instance Git repository exists at `https://git.ocp4.example.com/` with skip server verification enabled. User `developer` user with `d3v3lop3r` as the password.
+- Create a new project with name `machineconfig` and it should be `Public` in the visibility level.
 - An application named `mach-config-motd-deploy` mnust be exists in the Git repository with the Sync Policy configured as `Manual`.
 
-### The Git repository `https://git.ocp4.example.com/` contains `four` MachineConfig resources as follows:
+### The Git repository `https://git.ocp4.example.com/developer/machineconfig.git` contains `four` MachineConfig resources as follows:
 
 ### A file called 61-datacenter-swissre.yaml which uses the latest ignition version with the following configuration:
 - A path exists called /etc/datacenter-swissre
